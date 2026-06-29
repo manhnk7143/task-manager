@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 3, 2018 10:00:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="com.dev.dbaas.database.enties.TbAgentHeartbeat" table="tb_agent_heartbeat">
+    <id name="id" type="string">
+      <column name="id" length="36" />
+      <generator class="uuid" />
+    </id>
+    <property name="agentId" type="string">
+      <column length="36" name="agent_id" not-null="true"/>
+    </property>
+    <property name="computeId" type="string">
+      <column length="36" name="compute_id" not-null="true"/>
+    </property>
+    <property name="instanceId" type="string">
+      <column length="36" name="instance_id" not-null="true"/>
+    </property>
+    <property name="orgId" type="string">
+      <column length="255" name="org_id" not-null="true"/>
+    </property>
+    <property name="projectId" type="string">
+      <column length="255" name="project_id" not-null="true"/>
+    </property>
+
+    <property name="createdAt" type="java.time.LocalDateTime">
+      <column length="19" name="created_at"/>
+    </property>
+    <property name="updatedAt" type="java.time.LocalDateTime">
+      <column length="19" name="updated_at"/>
+    </property>
+    <property name="deletedAt" type="java.time.LocalDateTime">
+      <column length="19" name="deleted_at"/>
+    </property>
+  </class>
+</hibernate-mapping>

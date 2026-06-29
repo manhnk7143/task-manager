@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 3, 2018 10:00:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="com.dev.dbaas.database.enties.TbCompute" table="tb_compute">
+    <id name="id" type="string">
+      <column name="id" length="36" />
+      <generator class="uuid" />
+    </id>
+    <property name="name" type="string">
+      <column length="255" name="name"/>
+    </property>
+    <property name="flavorId" type="string">
+      <column length="36" name="flavor_id" not-null="true"/>
+    </property>
+    <property name="glanceImageId" type="string">
+      <column length="36" name="glance_image_id" not-null="true"/>
+    </property>
+    <property name="instanceId" type="string">
+      <column length="36" name="instance_id" not-null="true"/>
+    </property>
+    <property name="neutronSecurityGroupId" type="string">
+      <column length="36" name="neutron_security_group_id" not-null="true"/>
+    </property>
+    <property name="novaInstanceId" type="string">
+      <column length="36" name="nova_instance_id" not-null="true"/>
+    </property>
+    <property name="orgId" type="string">
+      <column length="255" name="org_id" not-null="true"/>
+    </property>
+    <property name="projectId" type="string">
+      <column length="255" name="project_id" not-null="true"/>
+    </property>
+    <property name="role" type="string">
+      <column length="255" name="role" not-null="true"/>
+    </property>
+    <property name="regionId" type="string">
+      <column length="255" name="region_id" not-null="true"/>
+    </property>
+    <property name="statusAgentMonitor" type="string">
+      <column length="20" name="status_agent_monitor"/>
+    </property>
+    <property name="monitorResourceId" type="string">
+      <column length="36" name="monitor_resource_id"/>
+    </property>
+    <property name="zoneName" type="string">
+      <column length="50" name="zone_name"/>
+    </property>
+
+    <property name="createdAt" type="java.time.LocalDateTime">
+      <column length="19" name="created_at"/>
+    </property>
+    <property name="updatedAt" type="java.time.LocalDateTime">
+      <column length="19" name="updated_at"/>
+    </property>
+
+    <property name="status" type="string">
+      <column length="50" name="status"/>
+    </property>
+    <property name="deletedAt" type="java.time.LocalDateTime">
+      <column length="19" name="deleted_at"/>
+    </property>
+    <property name="sendLogResource" type="java.lang.Boolean">
+      <column  name="send_log_resource"/>
+    </property>
+
+  </class>
+</hibernate-mapping>

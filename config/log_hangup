@@ -1,0 +1,42 @@
+call-in-extension
+
+CHANNEL_CREATE: CallId = 4e50ff5130d381530101636501655eb2@124.158.5.215; Caller = 0332796542; Destination = 842471060021
+CALL-CDR : CallId = 4e50ff5130d381530101636501655eb2@124.158.5.215; uuid = e3bda246-b755-11e9-abdf-57e1b676e289; parrentUuid = null; recordSession = 3; extension = 20017 caller = 0332796542; destination = 842471060021; callContext = public; queueName = null; direction = inbound; recordPath = /data/recording/2019-08-05-14-51-55_842471060021_0332796542.wav; cause = NORMAL_CLEARING
+
+
+call-in-group
+
+CHANNEL_CREATE: CallId =  693d1c0f0045fa5a010163650165a9c6@124.158.5.215; Caller = 0332796542; Destination = 842471060021
+
+CALL-CDR : CallId = 693d1c0f0045fa5a010163650165a9c6@124.158.5.215; uuid = cc22dad4-b75f-11e9-adb6-57e1b676e289; parrentUuid = cd7cb530-b75f-11e9-adca-57e1b676e289; recordSession = 11; extension = 20017 caller = 0332796542; destination = 842471060021; callContext = public; queueName = default@khach-hang05.vn; direction = inbound; recordPath = /data/recording/2019-08-05-16-02-50_842471060021_0332796542.wav; cause = NORMAL_CLEARING
+
+
+call-in-ivr
+
+CHANNEL_CREATE: CallId = 6d6d66e44063e486010163650165d79e@124.158.5.215; Caller = 0332796542; Destination = 842471060021
+CALL-CDR :
+
+CALL-CDR : CallId = 6d6d66e44063e486010163650165d79e@124.158.5.215; uuid = 5be62fbc-b766-11e9-ae79-57e1b676e289; parrentUuid = null; recordSession = 20; extension = 20017; caller = 0332796542; destination = 842471060021; callContext = public; queueName = null; direction = inbound; recordPath = sofia/gateway/203.205.21.20/20017; cause = NORMAL_CLEARING
+
+
+
+call-in-ivr-group
+
+CHANNEL_CREATE: CallId = 5b95ac702b624266010163650165e593@124.158.5.215; Caller = 0332796542; Destination = 842471060021
+CALL-CDR :  CallId = 5b95ac702b624266010163650165e593@124.158.5.215; uuid = ed13d58c-b768-11e9-af34-57e1b676e289; parrentUuid = f1b8a6ee-b768-11e9-af43-57e1b676e289; recordSession = 13; extension = 20017 caller = 0332796542; destination = 842471060021; callContext = public; queueName = default@khach-hang05.vn; direction = inbound; recordPath = default@khach-hang05.vn; cause = NORMAL_CLEARING
+
+
+call-out
+
+CHANNEL_CREATE : CallId = 99140ZTkwMjNhN2VkM2JjYzdhODEyYWM5ZTgzMjJjZGFkOTM; Caller = 20017; Destination = 0332796542
+CALL-CDR : CallId = 99140ZTkwMjNhN2VkM2JjYzdhODEyYWM5ZTgzMjJjZGFkOTM; uuid = 7d2f9b50-b76f-11e9-af84-57e1b676e289; parrentUuid = null; recordSession = 1; extension = 0332796542 caller = 20017; destination = 0332796542; callContext = default; queueName = null; direction = inbound; pbxPhone = 842471060021; recordPath = /opt/freeswitch/recordings/2019-08-05-17-55-08_0332796542_20017.wav; cause = NORMAL_CLEARING
+
+
+call-in-house
+
+CHANNEL_CREATE : CallId = 99140NWJkYjc0YTk1NWU5YThiNDhjMjFhYzExMTU2N2Y5ZTU; Caller = 20017; Destination = 20018
+
+CALL-CDR : CallId = 99140NWJkYjc0YTk1NWU5YThiNDhjMjFhYzExMTU2N2Y5ZTU; pbxPhone = 20017; uuid = 9bc37bc8-b82c-11e9-bab6-57e1b676e289; parrentUuid = null; recordSession = 4; extension = 20018 caller = 20017; destination = 20018; callContext = default; queueName = null; direction = inbound; recordPath = /opt/freeswitch/recordings/2019-08-06-16-28-54_20018_20017.wav; cause = NORMAL_CLEARING
+
+
+

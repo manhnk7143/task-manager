@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 3, 2018 10:00:51 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class name="com.dev.dbaas.database.enties.TbInstance" table="tb_instance">
+    <id name="id" type="string">
+      <column name="id" length="36" />
+      <generator class="uuid" />
+    </id>
+    <property name="flavorId" type="string">
+      <column length="36" name="flavor_id"/>
+    </property>
+    <property name="datastoreId" type="string">
+      <column length="36" name="datastore_id" not-null="true"/>
+    </property>
+    <property name="datastoreModeId" type="string">
+      <column length="36" name="datastore_mode_id" not-null="true"/>
+    </property>
+    <property name="datastoreVersionId" type="string">
+      <column length="36" name="datastore_version_id" not-null="true"/>
+    </property>
+    <property name="groupConfigurationId" type="string">
+      <column length="36" name="group_configuration_id" not-null="true"/>
+    </property>
+    <property name="serverGroupId" type="string">
+      <column length="36" name="server_group_id"/>
+    </property>
+    <property name="subnetId" type="string">
+      <column length="36" name="subnet_id"/>
+    </property>
+    <property name="networkId" type="string">
+      <column length="36" name="network_id"/>
+    </property>
+    <property name="vpcId" type="string">
+      <column length="36" name="vpc_id"/>
+    </property>
+    <property name="message" type="string">
+      <column length="255" name="message"/>
+    </property>
+    <property name="volumeSize" type="integer">
+      <column name="volume_size"/>
+    </property>
+    <property name="name" type="string">
+      <column length="255" name="name" not-null="true"/>
+    </property>
+    <property name="orgId" type="string">
+      <column length="255" name="org_id" not-null="true"/>
+    </property>
+    <property name="status" type="string">
+      <column length="50" name="status" not-null="true"/>
+    </property>
+    <property name="enableMonitor" type="string">
+      <column length="50" name="enable_monitor" not-null="true"/>
+    </property>
+    <property name="statusMonitorAgent" type="string">
+      <column length="50" name="status_monitor_agent" not-null="true"/>
+    </property>
+    <property name="projectId" type="string">
+      <column length="255" name="project_id" not-null="true"/>
+    </property>
+    <property name="regionId" type="string">
+      <column length="255" name="region_id"/>
+    </property>
+    <property name="createdAt" type="java.time.LocalDateTime">
+      <column length="19" name="created_at"/>
+    </property>
+    <property name="updatedAt" type="java.time.LocalDateTime">
+      <column length="19" name="updated_at"/>
+    </property>
+    <property name="deletedAt" type="java.time.LocalDateTime">
+      <column length="19" name="deleted_at"/>
+    </property>
+    <property name="neutronSecurityGroupClientIds" type="string">
+      <column length="400" name="neutron_security_group_client_ids"/>
+    </property>
+    <property name="billingMode" type="string">
+      <column length="255" name="billing_mode"/>
+    </property>
+  </class>
+</hibernate-mapping>
