@@ -1,0 +1,820 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "grpc.model.dbaas_service";
+
+package REDIS_SERVICE;
+
+message CommonResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+}
+
+// configuration
+message CreateGroupConfigurationRequest {
+  string datastoreModeId = 1;
+  string name = 2;
+  string description = 3;
+  map<string, string> overridesConfig = 4;
+}
+
+message CreateGroupConfigurationResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  GroupConfigurationRes data = 5;
+}
+
+message GroupConfigurationRes {
+  string groupConfigId = 1;
+  string datastoreModeId = 2;
+  string name = 3;
+  string description = 4;
+  map<string, string> overridesConfig = 5;
+}
+
+message GetListGroupConfigurationRequest {
+  int32 page = 1;
+  int32 size = 2;
+  string datastoreModeId = 3;
+  string query = 4;
+  bool getDefault = 5;
+  string datastoreCode = 6;
+}
+
+message GetListGroupConfigurationResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+
+  ListGroupConfigurationView data = 5;
+}
+
+message ListGroupConfigurationView {
+  repeated GroupConfigurationView docs = 1;
+  int32 page = 2;
+  int32 size = 3;
+  int32 total = 4;
+  int32 totalPage = 5;
+}
+
+message GroupConfigurationView {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string datastoreName = 4;
+  string datastoreVersionId = 5;
+  string datastoreVersion = 6;
+  string datastoreMode = 7;
+  string datastoreModeId = 8;
+  string createdAt = 9;
+  string updatedAt = 10;
+  bool isGroupDefault = 11;
+  repeated InstancesUseGroupConfig listInstance = 12;
+}
+
+message InstancesUseGroupConfig {
+  string id = 1;
+  string name = 2;
+}
+
+message GetListGroupConfigDropdownRequest {
+  string datastoreModeId = 1;
+}
+
+message GetListGroupConfigDropdownResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ListGroupConfigDropdown data = 5;
+}
+
+message ListGroupConfigDropdown {
+  repeated GroupConfigDropdown docs = 1;
+}
+
+message GroupConfigDropdown {
+  string id = 1;
+  string name = 2;
+  bool groupDefault = 3;
+}
+
+message GetGroupConfigDetailRequest {
+  string groupConfigId = 1;
+}
+
+message GetGroupConfigDetailResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  GroupConfigDetailRes data = 5;
+}
+
+message GroupConfigDetailRes {
+  string groupConfigId = 1;
+  string datastoreModeId = 2;
+  string name = 3;
+  string description = 4;
+  repeated ConfigurationView configurations = 5;
+}
+
+message ConfigurationView {
+  string id = 1;
+  string paramName = 2;
+  string paramValue = 3;
+  string defaultValue = 4;
+  string valueRange = 5;
+  string valueType = 6;
+  string description = 7;
+  string createdAt = 8;
+  string updatedAt = 9;
+}
+
+message GetListConfigurationDefaultRequest {
+  string datastoreModeId = 1;
+}
+
+message GetListConfigurationDefaultResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  GroupConfigDetailRes data = 5;
+}
+
+message ListConfiguration {
+  repeated ConfigurationView docs = 1;
+}
+
+message GetConfigurationInstanceRequest {
+  string instanceId = 1;
+}
+
+message GetConfigurationInstanceResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ListConfiguration data = 5;
+}
+
+message UpdateConfigurationsRequest {
+  string groupConfigId = 1;
+  map<string, string> configurations = 2;
+}
+
+message UpdateGroupConfigurationRequest {
+  string groupConfigId = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message DeleteGroupConfigurationRequest {
+  repeated GroupConfigIds groupConfigIds = 1;
+}
+
+message GroupConfigIds {
+  string groupConfigId = 1;
+}
+
+// datastore
+message GetAllDatastoreVersionRequest {
+  string datastoreCode = 1;
+  string tag = 2;
+}
+
+message GetAllDatastoreVersionResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ListDatastoreVersion data = 5;
+}
+
+message ListDatastoreVersion {
+  repeated DatastoreVersion docs = 1;
+}
+
+message DatastoreVersion {
+  string id = 1;
+  string name = 2;
+  repeated VersionInfo versionInfos = 3;
+  string code = 4;
+}
+
+message VersionInfo {
+  string id = 1;
+  string versionName = 2;
+  repeated ModeInfo modeInfo = 3;
+}
+
+message ModeInfo {
+  string id = 1;
+  string name = 2;
+  string code = 3;
+}
+
+// end datastore
+
+// database action
+message ExecuteActionRequest {
+  string instanceId = 1;
+  string action = 2;
+  map<string, string> requestData = 3;
+}
+
+message ExecuteActionResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  map<string, string> data = 5;
+}
+
+// end database action
+
+// instance
+message CreateInstanceRequest {
+  string name = 1;
+  int32 volumeSize = 2;
+  string flavorId = 3;
+  string groupConfigurationId = 4;
+  string securityGroupIds = 5;
+  string networkId = 6;
+  string subnetId = 7;
+  Datastore datastore = 8;
+  string zoneName = 9;
+  string requestMetadata = 10;
+  string backupId = 11;
+}
+
+message CreateInstanceResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  InstanceRes data = 5;
+}
+
+message InstanceRes {
+  string instanceId = 1;
+}
+
+message Datastore {
+  string datastoreCode = 1;
+  string datastoreVersionId = 2;
+  string datastoreModeId = 3;
+}
+
+message GetInstanceDetailRequest {
+  string instanceId = 1;
+}
+
+message GetInstanceDetailResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  InstanceDetailRes data = 5;
+}
+
+message InstanceDetailRes {
+  string id = 1;
+  string name = 2;
+  string datastoreName = 3;
+  string datastoreVersion = 4;
+  string datastoreMode = 5;
+  string groupConfigId = 6;
+  string securityClientIds = 7;
+  string vpcId = 8;
+  string subnetId = 9;
+  string status = 10;
+  string dataDetail = 11;
+  string flavorId = 12;
+  string vpcName = 13;
+  string subnetName = 14;
+  string flavorName = 15;
+  int32 volumeSize = 16;
+  string created = 17;
+  string updated = 18;
+}
+
+message GetListInstanceRequest {
+  int32 page = 1;
+  int32 size = 2;
+  string query = 3;
+  string datastoreCode = 4;
+}
+
+message GetListInstanceResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ListInstance data = 5;
+}
+
+message ListInstance {
+  int32 page = 1;
+  int32 size = 2;
+  int32 total = 3;
+  int32 totalPage = 4;
+  repeated Instance docs = 5;
+}
+
+message Instance {
+  string id = 1;
+  string name = 2;
+  int32 vCpus = 3;
+  int32 ram = 4;
+  int32 disk = 5;
+  int32 volumeSize = 6;
+  string datastoreName = 7;
+  string datastoreVersion = 8;
+  string datastoreVersionId = 9;
+  string datastoreMode = 10;
+  string datastoreModeId = 11;
+  string status = 12;
+  string createdAt = 13;
+  string updatedAt = 14;
+  string groupConfigId = 15;
+}
+
+message GetListInstanceDropdownRequest {
+  string instanceName = 1;
+  string datastoreCode = 2;
+  string status = 3;
+}
+
+message GetListInstanceDropdownResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ListInstanceDropdown data = 5;
+}
+
+message ListInstanceDropdown {
+  repeated InstanceDropdown docs = 1;
+}
+
+message InstanceDropdown {
+  string id = 1;
+  string name = 2;
+  string datastoreName = 3;
+}
+
+message DeleteInstanceRequest {
+  repeated InstanceIds instanceIds = 1;
+}
+
+message InstanceIds {
+  string instanceId = 1;
+}
+
+message GetInstanceInfoRequest {
+  string instanceId = 1;
+}
+
+message GetInstanceInfoResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  InstanceInfo data = 5;
+}
+
+message InstanceInfo {
+  string instanceName = 1;
+  string orgId = 2;
+  string regionId = 3;
+  string projectId = 4;
+  string type = 5;
+}
+
+// end instance
+
+// backup
+message GetListBackupRequest {
+  int32 page = 1;
+  int32 size = 2;
+  string query = 3;
+  string instanceId = 4;
+  string datastoreCode = 5;
+}
+
+message GetListBackupResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ListBackup data = 5;
+}
+
+message ListBackup {
+  int32 page = 1;
+  int32 size = 2;
+  int32 total = 3;
+  int32 totalPage = 4;
+  repeated BackupInfo docs = 5;
+}
+
+message BackupInfo {
+  string backupId = 1;
+  string backupName = 2;
+  string datastoreName = 3;
+  string datastoreVersion = 4;
+  string instanceId = 5;
+  string instanceName = 6;
+  int32 size = 7;
+  string backupStrategyType = 8;
+  string status = 9;
+  string backupStartAt = 10;
+  string backupEndAt = 11;
+  string created = 12;
+  string datastoreCode = 13;
+}
+
+message GetListBackupDropdownRequest {
+  string datastoreCode = 1;
+  string backupName = 2;
+}
+
+message GetListBackupDropdownResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ListBackupDropdown data = 5;
+}
+
+message ListBackupDropdown {
+  repeated BackupDropdown docs = 1;
+}
+
+message BackupDropdown {
+  string id = 1;
+  string name = 2;
+  string datastoreCode = 3;
+}
+
+message DeleteBackupRequest {
+  repeated BackupIds backupIds = 1;
+}
+
+message BackupIds {
+  string backupId = 1;
+}
+
+message CreateBackupScheduleRequest {
+  string instanceId = 1;
+  int32 hour = 2;
+  int32 minute = 3;
+  int32 second = 4;
+  int32 interval = 5;
+  int32 keepRecordBackup = 6;
+  string timeZone = 7;
+}
+
+message GetBackupScheduleRequest {
+  string id = 1;
+}
+
+message GetBackupScheduleResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  BackupSchedule data = 5;
+}
+
+message GetListBackupScheduleRequest {
+  int32 page = 1;
+  int32 size = 2;
+  string datastoreCode = 3;
+}
+
+message GetListBackupScheduleResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ListBackupSchedule data = 5;
+}
+
+message ListBackupSchedule {
+  int32 page = 1;
+  int32 size = 2;
+  int32 total = 3;
+  int32 totalPage = 4;
+  repeated BackupSchedule docs = 5;
+}
+
+message BackupSchedule {
+  string id = 1;
+  string instanceId = 2;
+  string instanceName = 3;
+  int32 hour = 4;
+  int32 minute = 5;
+  int32 second = 6;
+  string timeZone = 7;
+  int32 intervalNum = 8;
+  string intervalType = 9;
+  string lastBackupTime = 10;
+  string nextBackupTime = 11;
+  int32 keepRecordBackup = 12;
+  string created = 13;
+  string updated = 14;
+}
+
+message UpdateBackupScheduleRequest {
+  string id = 1;
+  int32 hour = 2;
+  int32 minute = 3;
+  int32 second = 4;
+  int32 intervalNum = 5;
+  int32 keepRecordBackup = 6;
+  bool active = 7;
+  string timeZone = 8;
+}
+
+message DeleteBackupScheduleRequest {
+  repeated BackupScheduleIds backupScheduleIds = 1;
+}
+
+message BackupScheduleIds {
+  string backupScheduleId = 1;
+}
+// end backup
+
+// monitor
+message GetGraphInfrasMonitorRequest {
+  string resourceValue = 1;
+  string resourceName = 2;
+  string resourceId = 3;
+  string dimensionValue = 4;
+}
+
+message GetGraphInfrasMonitorResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  GraphDataMonitor data = 5;
+}
+
+message GraphDataMonitor {
+  string jsonData = 1;
+}
+
+message GetStatisticMonitorRequest {
+  string resourceValue = 1;
+  string dimensionValue = 2;
+  StatisticMonitoredObject monitoredObject = 3;
+  string metricValues = 4;
+  int32 period = 5;
+  string startTime = 6;
+  string endTime = 7;
+  string statistics = 8;
+}
+
+message StatisticMonitoredObject {
+  string resourceValue = 1;
+  string resourceName = 2;
+  string attachmentName = 3;
+  string attachmentId = 4;
+  string device = 5;
+}
+
+message GetStatisticMonitorResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  StatisticData data = 5;
+}
+
+message StatisticData {
+  string jsonData = 1;
+}
+
+// health-check service by resource
+message HealthCheckServiceRequest{
+  string resourceId = 1;
+}
+
+message HealthCheckServiceResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  HealthCheckServiceData data = 5;
+}
+
+message HealthCheckServiceData {
+  string jsonData = 1;
+}
+
+message GetResourceExternalsRequest {
+  string instanceId = 1;
+}
+
+message GetResourceExternalsResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ResourceExternalRes data = 5;
+}
+
+message ResourceExternalRes {
+  repeated ResourceExternalData docs = 1;
+  bool isAttachment = 2;
+}
+
+message ResourceExternalData {
+  string encryptedKey = 1;
+  string resourceId = 2;
+  string name = 3;
+  string status = 4;
+  string configStatus = 5;
+  string agentCode = 6;
+  string resourceName = 7;
+  string groupId = 8;
+  repeated Attachment attachments = 9;
+}
+
+message Attachment {
+  string name = 1;
+  string id = 2;
+}
+
+message GetResourceOverviewRequest {
+
+}
+
+message GetResourceOverviewResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  ResourceOverviewRes data = 5;
+}
+
+message ResourceOverviewRes {
+  ResourceUsage resource = 1;
+}
+
+message ResourceUsage {
+  message Usage {
+    int32 used = 1;
+    int32 limit = 2;
+  }
+
+  Usage cpu = 1;
+  Usage ram = 2;
+  Usage systemDisk = 3;
+  Usage volume = 4;
+}
+
+// Load Balancers
+message CreateReplicasLBRequest {
+  string loadBalancerId = 1;
+  int32 replicasServer = 2;
+  string zones = 3;
+}
+
+message GetReplicasLBRequest {
+
+}
+
+message GetReplicasLBResponse {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  Data data = 5;
+
+  message Data {
+    repeated ReplicasInfo replicasInfo = 1;
+  }
+
+  message ReplicasInfo {
+    string id = 1;
+    string parentId = 2;
+    string status = 3;
+  }
+}
+
+message TriggerSyncRequest {
+  string loadBalancerId = 1;
+}
+
+message DeleteReplicasLBRequest {
+  string loadBalancerId = 1;
+}
+
+service ConfigurationService {
+  rpc CreateGroupConfiguration(CreateGroupConfigurationRequest) returns (CreateGroupConfigurationResponse) {}
+  rpc GetListGroupConfiguration(GetListGroupConfigurationRequest) returns (GetListGroupConfigurationResponse) {}
+  rpc GetListGroupConfigDropdown(GetListGroupConfigDropdownRequest) returns (GetListGroupConfigDropdownResponse) {}
+  rpc GetGroupConfigDetail(GetGroupConfigDetailRequest) returns (GetGroupConfigDetailResponse) {}
+  rpc GetListConfigurationDefault(GetListConfigurationDefaultRequest) returns (GetListConfigurationDefaultResponse) {}
+  rpc GetConfigurationInstance(GetConfigurationInstanceRequest) returns (GetConfigurationInstanceResponse) {}
+  rpc UpdateConfigurations(UpdateConfigurationsRequest) returns (CommonResponse) {}
+  rpc UpdateGroupConfiguration(UpdateGroupConfigurationRequest) returns (CommonResponse) {}
+  rpc DeleteGroupConfiguration(DeleteGroupConfigurationRequest) returns (CommonResponse) {}
+}
+
+service DatastoreService {
+  rpc GetAllDatastoreVersion(GetAllDatastoreVersionRequest) returns (GetAllDatastoreVersionResponse) {}
+}
+
+service DatabaseActionService {
+  rpc ExecuteAction(ExecuteActionRequest) returns (ExecuteActionResponse) {}
+}
+
+service InstanceService {
+  rpc CreateInstance(CreateInstanceRequest) returns (CreateInstanceResponse) {}
+  rpc GetInstanceDetail(GetInstanceDetailRequest) returns (GetInstanceDetailResponse) {}
+  rpc GetInstanceDetailV2(GetInstanceDetailRequest) returns (GetInstanceDetailResponseV2) {}
+  rpc GetListInstance(GetListInstanceRequest) returns (GetListInstanceResponse) {}
+  rpc GetListInstanceDropdown(GetListInstanceDropdownRequest) returns (GetListInstanceDropdownResponse) {}
+  rpc DeleteInstance(DeleteInstanceRequest) returns (CommonResponse) {}
+
+  rpc GetInstanceInfo(GetInstanceInfoRequest) returns (GetInstanceInfoResponse) {}
+}
+
+service BackupService {
+  rpc GetListBackup(GetListBackupRequest) returns (GetListBackupResponse) {}
+  rpc GetListBackupDropdown(GetListBackupDropdownRequest) returns (GetListBackupDropdownResponse) {}
+  rpc DeleteBackup(DeleteBackupRequest) returns (CommonResponse) {}
+
+  rpc CreateBackupSchedule(CreateBackupScheduleRequest) returns (CommonResponse) {}
+  rpc GetBackupSchedule(GetBackupScheduleRequest) returns (GetBackupScheduleResponse) {}
+  rpc GetListBackupSchedule(GetListBackupScheduleRequest) returns (GetListBackupScheduleResponse) {}
+  rpc UpdateBackupSchedule(UpdateBackupScheduleRequest) returns (CommonResponse) {}
+  rpc DeleteBackupSchedule(DeleteBackupScheduleRequest) returns (CommonResponse) {}
+}
+
+service MonitorService {
+  rpc GetGraphInfras(GetGraphInfrasMonitorRequest) returns (GetGraphInfrasMonitorResponse) {}
+  rpc GetStatisticMonitor(GetStatisticMonitorRequest) returns (GetStatisticMonitorResponse) {}
+  rpc HealthCheckService(HealthCheckServiceRequest) returns (HealthCheckServiceResponse) {}
+  rpc GetResourceExternals(GetResourceExternalsRequest) returns (GetResourceExternalsResponse) {}
+}
+
+service ResourceService {
+  rpc GetResourceOverview(GetResourceOverviewRequest) returns (GetResourceOverviewResponse) {}
+}
+
+service LoadBalancerService {
+  rpc CreateReplicasLB(CreateReplicasLBRequest) returns (CommonResponse) {}
+  rpc GetReplicasLB(GetReplicasLBRequest) returns (GetReplicasLBResponse) {}
+  rpc DeleteReplicasLB(DeleteReplicasLBRequest) returns (CommonResponse) {}
+  rpc TriggerSync(TriggerSyncRequest) returns (CommonResponse) {}
+}
+
+// v2
+message GetInstanceDetailResponseV2 {
+  int32 status = 1;
+  string error = 2;
+  string msg = 3;
+  string currentTime = 4;
+  InstanceDetailResV2 data = 5;
+}
+
+message InstanceDetailResV2 {
+
+  message FlavorInfo {
+    string id = 1;
+    string name = 2;
+    int32 vCpus = 3;
+    int32 ram = 4;
+    int32 disk = 5;
+  }
+
+  string id = 1;
+  string name = 2;
+  string datastoreName = 3;
+  string datastoreVersion = 4;
+  string datastoreMode = 5;
+  string groupConfigId = 6;
+  string securityClientIds = 7;
+  string vpcId = 8;
+  string subnetId = 9;
+  string status = 10;
+  string dataDetail = 11;
+  string vpcName = 12;
+  string subnetName = 13;
+  int32 volumeSize = 14;
+  FlavorInfo flavorInfo = 15;
+  string created = 16;
+  string updated = 17;
+}
